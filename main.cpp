@@ -20,7 +20,7 @@ int main(){
         std::cout << "5. Изменить размер"<< std::endl;
         std::cout << "6. Напечатать массив"<< std::endl;
         std::cout << "7. Сортировка массива + Поиск элемента"<< std::endl;
-        std::cout << "8. Удаление дубликатов"<< std::endl;
+        std::cout << "8. Удаление дубликатов + Сортировка"<< std::endl;
         std::cout << "0. Выход"<< std::endl;
 
         std::cout << "\nВыберите действие: ";
@@ -121,11 +121,21 @@ int main(){
             }
             case 7:
             {
+                int target;
+                std::cout << "Введите элемент для поиска: ";
+                std::cin >> target;
+                std::size_t index;
+                if (array_binary_search(arr_ptr, size, target, index)){
+                    std::cout << "Элемент найден на позиции: "<< index << std::endl;
+                }
+                else{
+                    std::cout << "Элемент не найден"<< std::endl;
+                }
                 break;
             }
             case 8:
             {
-
+                arr_ptr = remove_duplicates(arr_ptr, size);
                 break;
             }
 

@@ -97,3 +97,69 @@ int* array_remove(int* arr, std::size_t& size, std::size_t pos){
 
     return arr;
 }
+
+int* boble_sort(int* arr, std::size_t size){
+    if (arr == nullptr){
+        return nullptr;
+    }
+    std::size_t count = arr[0];
+    for(std::size_t i = 1; i <= count - 1; ++i){
+        for(std::size_t j = 1; j <= count - i; ++j){
+            if (arr[j] > arr[j + 1]){
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+bool array_binary_search(const int* arr, std::size_t size, int target, std::size_t& out_index){
+    if (arr == nullptr){
+        return false;
+    }
+    std::size_t count = arr[0];
+    std::size_t left = 1;
+    std::size_t right = count;
+    
+    arr = boble_sort(const_cast<int*>(arr), size);
+    std::cout<< "Отсортированный массив: ";
+    array_print(arr, size);
+    while (left <= right){
+        std::size_t mid = left + (right - left) / 2;
+
+        if (arr[mid] == target){
+            out_index = mid - 1;
+            return true;
+        }
+        else if (arr[mid] < target){
+            left = mid + 1;
+        }
+        else{
+            right = mid - 1;
+        }
+    }
+    return false;
+}
+
+int* remove_duplicates(int* arr, std::size_t& size){
+    if (arr == nullptr){
+        return nullptr;
+    }
+    std::size_t count = arr[0];
+    if (count == 0){
+        return arr;
+    }
+    arr = boble_sort(arr, size);
+    std::size_t new_count = 1;
+    for(std::size_t i = 2; i <= count; ++i){
+        if (arr[i] != arr[new_count]){
+            new_count++;
+            arr[new_count] = arr[i];
+        }
+    }
+    arr[0] = new_count;
+
+    return arr;
+}
