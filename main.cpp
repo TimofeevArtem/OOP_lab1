@@ -1,6 +1,5 @@
 #include <iostream>
-#include "array_ops.cpp"
-
+#include "array_ops.h"
 
 int main(){
     int fl = 0;
@@ -24,7 +23,12 @@ int main(){
         std::cout << "0. Выход"<< std::endl;
 
         std::cout << "\nВыберите действие: ";
-        std::cin >> input;
+        while (!(std::cin >> input)) {
+            std::cout << "Введите число от 0 до 8"<< std::endl;
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cout << "\nВыберите действие: ";
+        }
         std::cout << "\n";
 
         switch (input){
@@ -35,12 +39,22 @@ int main(){
                     size = 0;
                 }
                 std::cout << "Введите размер массива: ";
-                std::cin >> size;
-
-                if (size == 0){
-                    std::cout << "Размер массива должен быть больше 0"<< std::endl;
-                    arr_ptr = nullptr;
-                    size = 0;
+                long long temp_size;
+                while (true) {
+                    if (!(std::cin >> temp_size)) {
+                        std::cout << "Введите корректный размер массива"<< std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите размер массива: ";
+                        continue;
+                    }
+                    if (temp_size <= 0) {
+                        std::cout << "Размер массива должен быть больше 0"<< std::endl;
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите размер массива: ";
+                        continue;
+                    }
+                    size = static_cast<std::size_t>(temp_size);
                     break;
                 }
                 arr_ptr = array_create(size);
@@ -74,10 +88,36 @@ int main(){
                 }
 
                 std::cout << "Введите элемент для вставки: ";
-                std::cin >> value;
+                while (!(std::cin >> value)) {
+                    std::cout << "Введите корректное целое число"<< std::endl;
+                    std::cin.clear();
+                    std::cin.ignore(1000, '\n');
+                    std::cout << "Введите элемент для вставки: ";
+                }
 
                 std::cout << "Введите позицию, на которую необходимо вставить элемент: ";
-                std::cin >> pos;
+                long long temp_pos;
+                while (true) {
+                    if (!(std::cin >> temp_pos)) {
+                        std::cout << "Введите корректную позицию"<< std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите позицию, на которую необходимо вставить элемент: ";
+                        continue;
+                    }
+                    if (temp_pos < 0) {
+                        std::cout << "Позиция не может быть отрицательной"<< std::endl;
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите позицию, на которую необходимо вставить элемент: ";
+                        continue;
+                    }
+                    pos = static_cast<std::size_t>(temp_pos);
+                    break;
+                }
+                if (pos > arr_ptr[0]){
+                    std::cout << "Неправильная позиция"<< std::endl;
+                    break;
+                }
                 arr_ptr = array_insert(arr_ptr, size, pos, value);
                 break;
             }
@@ -95,7 +135,28 @@ int main(){
                 }
 
                 std::cout << "Введите индекс элемента, который необходимо удалить: ";
-                std::cin >> pos;
+                long long temp_remove_pos;
+                while (true) {
+                    if (!(std::cin >> temp_remove_pos)) {
+                        std::cout << "Введите корректный индекс"<< std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите индекс элемента, который необходимо удалить: ";
+                        continue;
+                    }
+                    if (temp_remove_pos < 0) {
+                        std::cout << "Индекс не может быть отрицательным"<< std::endl;
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите индекс элемента, который необходимо удалить: ";
+                        continue;
+                    }
+                    pos = static_cast<std::size_t>(temp_remove_pos);
+                    break;
+                }
+                if (pos >= arr_ptr[0]){
+                    std::cout << "Неправильная позиция"<< std::endl;
+                    break;
+                }
 
                 arr_ptr = array_remove(arr_ptr, size, pos);
                 break;
@@ -109,7 +170,28 @@ int main(){
                 }
 
                 std::cout << "Введите новый размер массива: ";
-                std::cin >> new_size;
+                long long temp_new_size;
+                while (true) {
+                    if (!(std::cin >> temp_new_size)) {
+                        std::cout << "Введите корректный размер"<< std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите новый размер массива: ";
+                        continue;
+                    }
+                    if (temp_new_size <= 0) {
+                        std::cout << "Размер массива должен быть больше 0"<< std::endl;
+                        std::cin.ignore(1000, '\n');
+                        std::cout << "Введите новый размер массива: ";
+                        continue;
+                    }
+                    new_size = static_cast<std::size_t>(temp_new_size);
+                    break;
+                }
+                if (new_size < arr_ptr[0]){
+                    std::cout << "Новый размер массива не может быть меньше количества элементов"<< std::endl;
+                    break;
+                }
                 arr_ptr = array_resize(arr_ptr, size, new_size);
                 size = new_size;
                 break;
@@ -123,7 +205,12 @@ int main(){
             {
                 int target;
                 std::cout << "Введите элемент для поиска: ";
-                std::cin >> target;
+                while (!(std::cin >> target)) {
+                    std::cout << "Введите корректное целое число"<< std::endl;
+                    std::cin.clear();
+                    std::cin.ignore(1000, '\n');
+                    std::cout << "Введите элемент для поиска: ";
+                }
                 std::size_t index;
                 if (array_binary_search(arr_ptr, size, target, index)){
                     std::cout << "Элемент найден на позиции: "<< index << std::endl;

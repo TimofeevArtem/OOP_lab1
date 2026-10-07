@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstddef>
+#include "array_ops.h"
 
 int* array_create(std::size_t size){
     int* arr = new int[size + 1];
@@ -15,7 +16,6 @@ void array_delete(int*& arr){
 int* array_resize(int* arr, std::size_t size, std::size_t new_size){
     std::size_t count = arr[0];
     if (new_size < count){
-        std::cout << "Новый размер массива не может быть меньше количества элементов"<< std::endl;
         return arr;
     }
     int* new_arr = new int[new_size + 1];
@@ -31,7 +31,6 @@ int* array_resize(int* arr, std::size_t size, std::size_t new_size){
 int* array_insert(int* arr, std::size_t& size, std::size_t pos, int value){
     std::size_t count = arr[0];
     if (pos > count){
-        std::cout << "Неправильная позиция"<< std::endl;
         return arr;
     }
 
@@ -81,12 +80,10 @@ int* array_remove(int* arr, std::size_t& size, std::size_t pos){
     }
     std::size_t count = arr[0];
     if (count == 0){
-        std::cout << "Массив пустой"<< std::endl;
         return arr;
     }
 
     if (pos >= count){
-        std::cout << "Неправильная позиция"<< std::endl;
         return arr;
     }
 
