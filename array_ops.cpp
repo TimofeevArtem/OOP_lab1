@@ -100,7 +100,10 @@ int* bubble_sort(int* arr, std::size_t size){
         return nullptr;
     }
     std::size_t count = arr[0];
-    for(std::size_t i = 1; i <= count - 1; ++i){
+    if (count <= 1){
+        return arr;
+    }
+    for(std::size_t i = 1; i < count; ++i){
         for(std::size_t j = 1; j <= count - i; ++j){
             if (arr[j] > arr[j + 1]){
                 int temp = arr[j];
@@ -117,20 +120,26 @@ bool array_binary_search(const int* arr, std::size_t size, int target, std::size
         return false;
     }
     std::size_t count = arr[0];
+    out_index = 0;
+    if (count == 0){
+        return false;
+    }
+
     std::size_t left = 1;
     std::size_t right = count;
-    
-    arr = bubble_sort(const_cast<int*>(arr), size);
-    std::cout<< "Отсортированный массив: ";
-    array_print(arr, size);
+
+    int* mutable_arr = const_cast<int*>(arr);
+    mutable_arr = bubble_sort(mutable_arr, size);
+    std::cout << "Отсортированный массив: ";
+    array_print(mutable_arr, size);
     while (left <= right){
         std::size_t mid = left + (right - left) / 2;
 
-        if (arr[mid] == target){
+        if (mutable_arr[mid] == target){
             out_index = mid - 1;
             return true;
         }
-        else if (arr[mid] < target){
+        else if (mutable_arr[mid] < target){
             left = mid + 1;
         }
         else{
