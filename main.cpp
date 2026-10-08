@@ -23,7 +23,7 @@ int main(){
         std::cout << "0. Выход"<< std::endl;
 
         std::cout << "\nВыберите действие: ";
-        while (!(std::cin >> input)) {
+        while (!(std::cin >> input)){
             std::cout << "Введите число от 0 до 8"<< std::endl;
             std::cin.clear();
             std::cin.ignore(1000, '\n');
@@ -40,15 +40,15 @@ int main(){
                 }
                 std::cout << "Введите размер массива: ";
                 long long temp_size;
-                while (true) {
-                    if (!(std::cin >> temp_size)) {
+                while (true){
+                    if (!(std::cin >> temp_size)){
                         std::cout << "Введите корректный размер массива"<< std::endl;
                         std::cin.clear();
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите размер массива: ";
                         continue;
                     }
-                    if (temp_size <= 0) {
+                    if (temp_size <= 0){
                         std::cout << "Размер массива должен быть больше 0"<< std::endl;
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите размер массива: ";
@@ -88,7 +88,7 @@ int main(){
                 }
 
                 std::cout << "Введите элемент для вставки: ";
-                while (!(std::cin >> value)) {
+                while (!(std::cin >> value)){
                     std::cout << "Введите корректное целое число"<< std::endl;
                     std::cin.clear();
                     std::cin.ignore(1000, '\n');
@@ -97,15 +97,15 @@ int main(){
 
                 std::cout << "Введите позицию, на которую необходимо вставить элемент: ";
                 long long temp_pos;
-                while (true) {
-                    if (!(std::cin >> temp_pos)) {
+                while (true){
+                    if (!(std::cin >> temp_pos)){
                         std::cout << "Введите корректную позицию"<< std::endl;
                         std::cin.clear();
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите позицию, на которую необходимо вставить элемент: ";
                         continue;
                     }
-                    if (temp_pos < 0) {
+                    if (temp_pos < 0){
                         std::cout << "Позиция не может быть отрицательной"<< std::endl;
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите позицию, на которую необходимо вставить элемент: ";
@@ -136,15 +136,15 @@ int main(){
 
                 std::cout << "Введите индекс элемента, который необходимо удалить: ";
                 long long temp_remove_pos;
-                while (true) {
-                    if (!(std::cin >> temp_remove_pos)) {
+                while (true){
+                    if (!(std::cin >> temp_remove_pos)){
                         std::cout << "Введите корректный индекс"<< std::endl;
                         std::cin.clear();
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите индекс элемента, который необходимо удалить: ";
                         continue;
                     }
-                    if (temp_remove_pos < 0) {
+                    if (temp_remove_pos < 0){
                         std::cout << "Индекс не может быть отрицательным"<< std::endl;
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите индекс элемента, который необходимо удалить: ";
@@ -171,15 +171,15 @@ int main(){
 
                 std::cout << "Введите новый размер массива: ";
                 long long temp_new_size;
-                while (true) {
-                    if (!(std::cin >> temp_new_size)) {
+                while (true){
+                    if (!(std::cin >> temp_new_size)){
                         std::cout << "Введите корректный размер"<< std::endl;
                         std::cin.clear();
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите новый размер массива: ";
                         continue;
                     }
-                    if (temp_new_size <= 0) {
+                    if (temp_new_size <= 0){
                         std::cout << "Размер массива должен быть больше 0"<< std::endl;
                         std::cin.ignore(1000, '\n');
                         std::cout << "Введите новый размер массива: ";
@@ -205,7 +205,7 @@ int main(){
             {
                 int target;
                 std::cout << "Введите элемент для поиска: ";
-                while (!(std::cin >> target)) {
+                while (!(std::cin >> target)){
                     std::cout << "Введите корректное целое число"<< std::endl;
                     std::cin.clear();
                     std::cin.ignore(1000, '\n');
@@ -222,7 +222,7 @@ int main(){
             }
             case 8:
             {
-                arr_ptr = remove_duplicates(arr_ptr, size);
+                arr_ptr = array_unique(arr_ptr, size);
                 break;
             }
 
@@ -244,8 +244,7 @@ int main(){
         }
     }
 
-    if (arr_ptr != nullptr)
-    {
+    if (arr_ptr != nullptr){
         array_delete(arr_ptr);
     }
 

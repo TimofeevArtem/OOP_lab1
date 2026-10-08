@@ -140,7 +140,7 @@ bool array_binary_search(const int* arr, std::size_t size, int target, std::size
     return false;
 }
 
-int* remove_duplicates(int* arr, std::size_t& size){
+int* array_unique(int* arr, std::size_t& size){
     if (arr == nullptr){
         return nullptr;
     }
